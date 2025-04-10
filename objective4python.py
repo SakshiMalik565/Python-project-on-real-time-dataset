@@ -34,5 +34,11 @@ plt.tight_layout()
 plt.show()
 
 
+plt.figure(figsize=(8, 5))
+sns.boxplot(x=df['License Duration (Years)'], color="#00BCD4")
+plt.title("Boxplot of CPA License Durations")
+plt.xlabel("Years Licensed")
+plt.tight_layout()
+plt.show()
 
 
