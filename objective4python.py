@@ -42,3 +42,11 @@ plt.tight_layout()
 plt.show()
 
 
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df,x='Expiration Year',y='License Duration (Years)',hue='Status',alpha=0.6,palette='husl')
+plt.title("License Duration vs. Expiration Year")
+plt.xlabel("Expiration Year")
+plt.ylabel("License Duration (Years)")
+plt.legend(title="Status", fontsize=9, title_fontsize=10, loc='center left', bbox_to_anchor=(1, 0.5))
+plt.tight_layout()
+plt.show()
