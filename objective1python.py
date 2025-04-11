@@ -35,9 +35,19 @@ print("\n➡ COUNT OD UNIQUE COUNTRIES =",df_cleaned["Country"].nunique(),'\n\n\
 print("\n➡ UNIQUE COUNTRIES NAMES\n",df_cleaned["Country"].unique(),'\n\n\n')
 
 #CORRELATION AND COVARIANCE
-CORRELATION=df_cleaned.corr(numeric_only=True)
-print("\n➡ CORREALTION MATRIX\n",CORRELATION,'\n\n\n')
-print("\n➡ COVARIANCE MATRIX\n",df_cleaned.cov(numeric_only=True),'\n\n\n')
+df["Original Issue Date"] = pd.to_datetime(df["Original Issue Date"], errors="coerce")
+df["Expiration Date"] = pd.to_datetime(df["Expiration Date"], errors="coerce")
+today = pd.Timestamp.today()
+df["Days Since Issue"] = (today - df["Original Issue Date"]).dt.days
+df["Days Until Expiration"] = (df["Expiration Date"] - today).dt.days
+numeric_cols = df[["Days Since Issue", "Days Until Expiration"]]
+correlation_matrix = numeric_cols.corr()
+plt.figure(figsize=(8, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Heatmap of Date-Based Features")
+plt.tight_layout()
+plt.show()
+
 
 #1.License Status Analysis
 print("OBJECTIVE 1:License Status Analysis\n************************************\n\n")
